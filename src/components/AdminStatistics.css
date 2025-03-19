@@ -1,0 +1,33 @@
+/* src/components/AdminStatistics.css */
+.admin-statistics {
+    padding: 40px 20px;
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+    font-family: Arial, sans-serif;
+  }
+  
+  .admin-statistics h1 {
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .stats-card {
+    background: #f7f7f7;
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 8px;
+  }
+  
+  .stats-card p {
+    font-size: 18px;
+    margin: 10px 0;
+    color: #555;
+  }
+  
+  .loading, .error {
+    font-size: 18px;
+    margin-top: 20px;
+    color: #555;
+  }
+  

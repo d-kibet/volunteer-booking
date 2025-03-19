@@ -1,0 +1,128 @@
+/* src/components/AdminDashboard.css */
+.admin-dashboard {
+    padding: 40px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .admin-dashboard h1 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .message {
+    text-align: center;
+    color: green;
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
+  
+  .admin-container {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  
+  .form-section, .list-section {
+    flex: 1 1 400px;
+    background: #f7f7f7;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  }
+  
+  .form-section h2, .list-section h2 {
+    text-align: center;
+    margin-bottom: 15px;
+  }
+  
+  .event-form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .event-form label {
+    margin-top: 10px;
+    font-weight: bold;
+  }
+  
+  .event-form input,
+  .event-form textarea {
+    padding: 10px;
+    margin-top: 5px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .event-form button {
+    margin-top: 20px;
+    padding: 12px;
+    font-size: 18px;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .event-form button:hover {
+    background-color: #0056b3;
+  }
+  
+  .event-card {
+    background: #fff;
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+  }
+  
+  .event-card h3 {
+    margin: 0;
+    margin-bottom: 10px;
+  }
+  
+  .event-card p {
+    margin: 5px 0;
+  }
+  
+  .event-card img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+    margin-top: 10px;
+  }
+  
+  .admin-actions {
+    margin-top: 15px;
+    text-align: center;
+  }
+  
+  .admin-actions button {
+    margin: 0 5px;
+    padding: 8px 16px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .admin-actions button:first-of-type {
+    background-color: #ffc107; /* Edit button */
+    color: #fff;
+  }
+  
+  .admin-actions button:first-of-type:hover {
+    background-color: #e0a800;
+  }
+  
+  .admin-actions button:last-of-type {
+    background-color: #dc3545; /* Delete button */
+    color: #fff;
+  }
+  
+  .admin-actions button:last-of-type:hover {
+    background-color: #c82333;
+  }
+  

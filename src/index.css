@@ -1,13 +1,48 @@
-body {
+/* src/index.css */
+@import './theme.css';
+
+html, body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+  height: 100%;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/* Global body styling */
+body {
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-base);
+  background-color: var(--background-color);
+  color: var(--text-body);
+  position: relative;
 }
+
+/* Warm volunteering background image */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0; 
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* Replace this URL with your preferred volunteering-themed image */
+  background: url('https://openup.com/wp-content/themes/openup/build/svg/openup-sprite.svg?v=1742244401#wave-top-type-3')
+    no-repeat center center fixed;
+  background-size: cover;
+  z-index: -2;
+  opacity: 0.85;
+}
+
+/* Semi-transparent overlay for readability 
+body::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 244, 230, 0.6);
+  z-index: -1;
+}
+  */
+
+/* (Do not add Flexbox layout here so existing component layouts remain unchanged) */

@@ -1,24 +1,60 @@
-import logo from './logo.svg';
-import './App.css';
+// src/App.js
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Header from './components/Header';
+import Home from './components/Home';
+import About from './components/About';
+import Contact from './components/Contact';
+import Login from './components/Login';
+import Register from './components/Register';
+import UserDashboard from './components/UserDashboard';
+import UserProfile from './components/UserProfile';
+import AdminDashboard from './components/AdminDashboard';
+import AdminStatistics from './components/AdminStatistics';
+import EventList from './components/EventList';
+import EventDetails from './components/EventDetails';
+import ProtectedRoute from './components/ProtectedRoute';
+import AdminProtectedRoute from './components/AdminProtectedRoute';
+import Footer from './components/Footer';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="App">
+        <Header />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          {/* Other routes remain unchanged */}
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/dashboard" element={
+            <ProtectedRoute>
+              <UserDashboard />
+            </ProtectedRoute>
+          } />
+          <Route path="/profile" element={
+            <ProtectedRoute>
+              <UserProfile />
+            </ProtectedRoute>
+          } />
+          <Route path="/admin" element={
+            <AdminProtectedRoute>
+              <AdminDashboard />
+            </AdminProtectedRoute>
+          } />
+          <Route path="/admin/statistics" element={
+            <AdminProtectedRoute>
+              <AdminStatistics />
+            </AdminProtectedRoute>
+          } />
+          <Route path="/events" element={<EventList />} />
+          <Route path="/event/:id" element={<EventDetails />} />
+        </Routes>
+        <Footer />
+      </div>
+    </Router>
   );
 }
 

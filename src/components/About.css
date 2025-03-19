@@ -1,0 +1,47 @@
+/* src/components/About.css */
+.about-section {
+  padding: 60px 20px;
+  background-color: rgba(255, 255, 255, 0.95); /* slightly transparent for readability */
+  color: var(--text-heading);
+  font-family: var(--font-family-base);
+}
+
+.about-section h1 {
+  text-align: center;
+  margin-bottom: 40px;
+  font-size: var(--h1-size);
+}
+
+.about-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.about-text {
+  flex: 1 1 300px;
+  max-width: 500px;
+  margin: 20px;
+  font-size: var(--font-size-base);
+  color: var(--text-body);
+  line-height: 1.6;
+}
+
+.about-carousel {
+  flex: 1 1 300px;
+  max-width: 500px;
+  margin: 20px;
+}
+
+.slider-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.slider-item img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--border-radius);
+}

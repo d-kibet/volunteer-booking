@@ -1,0 +1,32 @@
+/* src/theme.css */
+:root {
+    /* Colors */
+    --primary-color: #5C3D99;
+    --primary-hover-color: #48307D;
+    --secondary-color: #F2994A;
+    --secondary-hover-color: #D17B3C;
+    --background-color: #F5F5F5;
+    --card-bg: #FFFFFF;
+    --border-color: #E0E0E0;
+    --text-heading: #333333;
+    --text-body: #555555;
+  
+    /* Typography */
+    --font-family-base: 'Inter', sans-serif;
+    --font-size-base: 16px;
+    --h1-size: 36px;
+    --h2-size: 28px;
+    --h3-size: 24px;
+  
+    /* Spacing & Layout */
+    --padding-base: 16px;
+    --margin-base: 16px;
+    --border-radius: 8px;
+  
+    /* Buttons */
+    --btn-primary-bg: var(--primary-color);
+    --btn-primary-hover-bg: var(--primary-hover-color);
+    --btn-accent-bg: var(--secondary-color);
+    --btn-accent-hover-bg: var(--secondary-hover-color);
+  }
+  

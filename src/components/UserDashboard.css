@@ -1,0 +1,68 @@
+/* src/components/UserDashboard.css */
+.user-dashboard {
+    padding: 40px 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  
+  .user-dashboard h1 {
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .user-dashboard h2 {
+    margin-bottom: 15px;
+    text-align: center;
+  }
+  
+  .dashboard-message {
+    text-align: center;
+    color: green;
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
+  
+  .dashboard-error {
+    text-align: center;
+    color: red;
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
+  
+  .event-card {
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+  }
+  
+  .event-card h3 {
+    margin-top: 0;
+  }
+  
+  .event-card p {
+    margin: 5px 0;
+  }
+  
+  .event-card img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+    margin-top: 10px;
+  }
+  
+  .btn-cancel {
+    margin-top: 15px;
+    padding: 10px 20px;
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .btn-cancel:hover {
+    background-color: #c82333;
+  }
+  

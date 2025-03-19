@@ -1,0 +1,19 @@
+/* src/components/EventCalendar.css */
+.event-calendar {
+  padding: 40px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+  font-family: Arial, sans-serif;
+}
+
+.event-calendar h1 {
+  margin-bottom: 20px;
+  font-size: 32px;
+  color: #333;
+}
+
+/* Optional: Customize FullCalendar's default styling */
+.fc {
+  font-size: 14px;
+}

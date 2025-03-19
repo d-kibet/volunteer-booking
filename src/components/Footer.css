@@ -1,0 +1,14 @@
+/* src/components/Footer.css */
+.footer {
+  background-color: var(--card-bg);
+  color: var(--text-heading);
+  text-align: center;
+  padding: var(--padding-base);
+  box-shadow: 0 -2px 4px rgba(0,0,0,0.1);
+  margin-top: var(--margin-base);
+}
+
+.footer p {
+  margin: 0;
+  font-size: var(--font-size-base);
+}
