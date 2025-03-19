@@ -1,15 +1,11 @@
 /* src/components/Home.css */
-
-/* Overall container for the Home page */
 .home {
   display: flex;
   flex-direction: column;
-  background-color: #f3f3f3; /* Light background for the page */
-  margin: 0;
-  padding: 0;
+  background-color: #f3f3f3;
 }
 
-/* ========== HERO SECTION ========== */
+/* HERO SECTION */
 .hero {
   position: relative;
   width: 100%;
@@ -57,7 +53,7 @@
   background-color: #48307D;
 }
 
-/* ========== SECONDARY SECTION ========== */
+/* SECONDARY SECTION */
 .secondary-section {
   background-color: #f0f0f0;
   text-align: center;
@@ -79,7 +75,7 @@
 }
 
 .secondary-btn {
-  background-color: #007BFF; /* bright blue button */
+  background-color: #007BFF;
   color: #fff;
   border: none;
   padding: 12px 24px;
@@ -93,7 +89,7 @@
   background-color: #0056b3;
 }
 
-/* ========== FEATURES SECTION ========== */
+/* FEATURES SECTION */
 .features-section {
   display: flex;
   justify-content: space-around;
@@ -120,11 +116,44 @@
   line-height: 1.4;
 }
 
-/* ========== FOOTER ========== */
+/* FOOTER */
 .home-footer {
   background-color: #eee;
   text-align: center;
   padding: 20px;
   color: #666;
   margin-top: 20px;
+}
+
+/* MEDIA QUERIES FOR MOBILE RESPONSIVENESS */
+@media screen and (max-width: 768px) {
+  .hero {
+    height: 350px;
+  }
+  
+  .hero-overlay h1 {
+    font-size: 32px;
+  }
+  
+  .hero-overlay p {
+    font-size: 16px;
+  }
+  
+  .secondary-section h2 {
+    font-size: 28px;
+  }
+  
+  .secondary-section p {
+    font-size: 14px;
+  }
+  
+  .features-section {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .feature-item {
+    max-width: 90%;
+    margin: 20px 0;
+  }
 }
