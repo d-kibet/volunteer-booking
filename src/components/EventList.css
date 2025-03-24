@@ -1,150 +1,180 @@
 /* src/components/EventList.css */
-.paginated-event-list {
-  padding: calc(var(--padding-base) * 2.5) var(--padding-base);
+.events-page {
+  width: 90%;
   max-width: 1200px;
   margin: 0 auto;
-  text-align: center;
+  padding: 40px 0;
+  font-family: 'Inter', sans-serif;
+  color: #333;
 }
 
-.paginated-event-list h1 {
-  margin-bottom: var(--margin-base);
-  font-size: var(--h1-size);
-  color: var(--text-heading);
+.events-page h1 {
+  font-size: 32px;
+  margin-bottom: 10px;
+  text-align: left;
 }
 
-.search-form {
-  margin-bottom: var(--margin-base);
-  text-align: center;
+.events-page p {
+  font-size: 16px;
+  color: #555;
+  margin-bottom: 30px;
 }
 
-.search-form input[type="text"] {
-  width: 300px;
-  padding: var(--padding-base);
-  font-size: var(--font-size-base);
-  border: 1px solid var(--border-color);
-  border-radius: var(--border-radius);
+/* FILTER BAR */
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 30px;
 }
 
-.search-form button {
-  padding: var(--padding-base);
-  margin-left: var(--margin-base);
-  font-size: var(--font-size-base);
-  background-color: var(--primary-color);
-  color: #fff;
-  border: none;
-  border-radius: var(--border-radius);
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+.filter-bar input[type="text"] {
+  flex: 1;
+  min-width: 180px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
 }
 
-.search-form button:hover {
-  background-color: var(--primary-hover-color);
+.filter-bar select {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
 }
 
+/* GRID LAYOUT */
 .grid-container {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   gap: 24px;
   justify-items: center;
   margin-bottom: 30px;
 }
 
 .grid-item {
-  background-color: var(--card-bg);
-  border: 1px solid var(--border-color);
-  padding: calc(var(--padding-base) * 1.5);
-  border-radius: var(--border-radius);
+  background-color: #fff;
+  border: 1px solid #eee;
+  padding: 20px;
+  border-radius: 8px;
   text-align: left;
   position: relative;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  width: 100%;
+  max-width: 320px;
 }
 
+/* Hover effect for grid items */
 .grid-item:hover {
   transform: translateY(-5px);
   box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-  background-color: #fff7f0; /* Light warm highlight on hover */
+  background-color: #fff7f0;
 }
 
 .opportunity-label {
   position: absolute;
   top: 16px;
   right: 16px;
-  background-color: var(--primary-color);
+  background-color: #a020f0;
   color: #fff;
   padding: 4px 10px;
   font-size: 12px;
-  border-radius: var(--border-radius);
+  border-radius: 4px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
 
-.event-tile {
-  text-decoration: none;
-  color: inherit;
-  display: block;
-  margin-bottom: 16px;
-}
-
-.event-tile h2 {
+.event-title {
   margin: 0;
   margin-bottom: 12px;
-  font-size: var(--h2-size);
-  color: var(--text-heading);
+  font-size: 20px;
+  color: #333;
 }
 
-.grid-item img {
+.event-image {
   width: 100%;
   max-height: 200px;
   object-fit: cover;
-  border-radius: var(--border-radius);
+  border-radius: 4px;
   margin-bottom: 12px;
+  cursor: pointer; /* show pointer to indicate clickable */
 }
 
-.grid-item p {
+.event-description {
   margin: 4px 0;
-  color: var(--text-body);
+  font-size: 16px;
+  color: #555;
   line-height: 1.4;
+}
+
+.event-date,
+.event-location {
+  margin: 4px 0;
+  font-size: 15px;
+  color: #666;
 }
 
 .btn-book {
   display: inline-block;
-  margin-top: var(--margin-base);
+  margin-top: 16px;
   padding: 10px 20px;
-  background-color: var(--btn-accent-bg);
+  background-color: #ff9800;
   color: #fff;
   border: none;
-  border-radius: var(--border-radius);
+  border-radius: 4px;
   cursor: pointer;
   font-weight: 500;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.2s ease;
 }
 
 .btn-book:hover {
-  background-color: var(--btn-accent-hover-bg);
+  background-color: #e68900;
 }
 
-.pagination {
-  text-align: center;
-  margin-bottom: 30px;
+/* PAGINATION CONTROLS */
+.pagination-controls {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin-top: 20px;
 }
 
-.page-btn {
-  margin: 0 5px;
-  padding: 8px 12px;
-  cursor: pointer;
-  background-color: #f3f3f3;
+.pagination-controls button {
+  padding: 8px 14px;
   border: none;
-  border-radius: var(--border-radius);
+  border-radius: 4px;
+  background-color: #eee;
+  cursor: pointer;
   transition: background-color 0.2s ease;
-  font-weight: 500;
 }
 
-.page-btn:hover {
-  background-color: #e1e1e1;
+.pagination-controls button:hover {
+  background-color: #ccc;
 }
 
-.page-btn.active {
-  background-color: var(--primary-color);
+.pagination-controls .active-page {
+  background-color: #007BFF;
   color: #fff;
+}
+
+.pagination-controls button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Responsive Adjustments */
+@media screen and (max-width: 768px) {
+  .events-page h1 {
+    text-align: center;
+  }
+
+  .filter-bar {
+    flex-direction: column;
+  }
+
+  .grid-container {
+    grid-template-columns: 1fr;
+  }
 }

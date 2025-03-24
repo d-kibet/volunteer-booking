@@ -1,6 +1,6 @@
 // src/components/Login.jsx
 import React, { useState, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { AuthContext } from '../AuthContext';
 import './Login.css';
 
@@ -10,6 +10,17 @@ const Login = () => {
   const { login } = useContext(AuthContext);
   const navigate = useNavigate();
 
+  // For demonstration only
+  const handleGoogleLogin = () => {
+    console.log('Google login not yet implemented.');
+    // Here you'd integrate Google OAuth or redirect to your server's OAuth endpoint
+  };
+
+  const handleFacebookLogin = () => {
+    console.log('Facebook login not yet implemented.');
+    // Here you'd integrate Facebook OAuth or redirect to your server's OAuth endpoint
+  };
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -17,53 +28,63 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      console.log("Submitting login with:", formData);
       const response = await fetch('http://localhost/volunteer-api/login.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)
       });
-      console.log("Raw response:", response);
       const data = await response.json();
-      console.log("Response data:", data);
       if (data.success) {
-        login(data.user); // Update the auth context with user details
-        setMessage("Login successful!");
-        navigate('/dashboard'); // Redirect to the dashboard (or home)
+        login(data.user);
+        setMessage('Login successful!');
+        navigate('/dashboard');
       } else {
         setMessage(data.message);
       }
     } catch (error) {
-      console.error("Error during login:", error);
-      setMessage("Error connecting to the server.");
+      console.error('Error during login:', error);
+      setMessage('Error connecting to the server.');
     }
   };
 
   return (
     <div className="login-page">
-      <h1>Login</h1>
-      <form onSubmit={handleSubmit} className="login-form">
-        <label>Email:</label>
-        <input 
-          type="email" 
-          name="email" 
-          value={formData.email} 
-          onChange={handleChange} 
-          required 
-        />
-        
-        <label>Password:</label>
-        <input 
-          type="password" 
-          name="password" 
-          value={formData.password} 
-          onChange={handleChange} 
-          required 
-        />
-        
-        <button type="submit" className="btn-primary">Login</button>
-      </form>
-      {message && <p style={{ marginTop: '20px' }}>{message}</p>}
+      <div className="login-card">
+        <h1 className="login-heading">Login</h1>
+        <p className="login-subheading">Access your account to start volunteering!</p>
+
+        <form onSubmit={handleSubmit} className="login-form">
+          <label>Email:</label>
+          <input 
+            type="email" 
+            name="email" 
+            value={formData.email} 
+            onChange={handleChange} 
+            required 
+          />
+          
+          <label>Password:</label>
+          <input 
+            type="password" 
+            name="password" 
+            value={formData.password} 
+            onChange={handleChange} 
+            required 
+          />
+
+          <Link to="/forgot-password" className="forgot-password-link">Forgot Password?</Link>
+
+          <button type="submit" className="btn-primary">Login</button>
+        </form>
+
+        {message && <p className="login-message">{message}</p>}
+
+        <div className="social-login">
+          <p>Or sign in with:</p>
+          <button className="google-btn" onClick={handleGoogleLogin}>Google</button>
+          <button className="facebook-btn" onClick={handleFacebookLogin}>Facebook</button>
+        </div>
+      </div>
     </div>
   );
 };

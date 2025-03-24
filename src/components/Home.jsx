@@ -2,19 +2,19 @@
 import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../AuthContext';
+import Hero from './Hero';
+import About from './About';
+import Contact from './Contact';
 import './Home.css';
 
 const Home = () => {
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  // Minimal logic for "Get Started"
   const handleGetStarted = () => {
     if (user) {
-      // If user is logged in, go to dashboard
       navigate('/dashboard');
     } else {
-      // If not, confirm whether they have an account
       const hasAccount = window.confirm(
         "Do you already have an account?\n\nOK → Login\nCancel → Register"
       );
@@ -27,16 +27,11 @@ const Home = () => {
   };
 
   return (
-    <div className="home">    
-    
-      {/* ========== SECONDARY SECTION ========== */}
-      <div className="secondary-section">
-        <h2>Empower Your Community</h2>
-        <p>Join us in making a difference by volunteering your time and skills.</p>
-        <button className="secondary-btn">Become a Volunteer</button>
-      </div>
+    <div className="home">
+      {/* HERO SECTION */}
+      <Hero onGetStarted={handleGetStarted} />
 
-      {/* ========== BULLET POINTS / FEATURES SECTION ========== */}
+      {/* FEATURES SECTION */}
       <div className="features-section">
         <div className="feature-item">
           <h3>Easy Booking</h3>
@@ -51,6 +46,12 @@ const Home = () => {
           <p>Connect with organizations and fellow volunteers.</p>
         </div>
       </div>
+
+      {/* EMBEDDED ABOUT SECTION */}
+      <About />
+
+      {/* EMBEDDED CONTACT SECTION */}
+      <Contact />
     </div>
   );
 };

@@ -5,102 +5,18 @@
   background-color: #f3f3f3;
 }
 
-/* HERO SECTION */
-.hero {
-  position: relative;
-  width: 100%;
-  height: 500px;
-  background: url('https://images.unsplash.com/photo-1573164574395-9e29717c7f6b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&q=80')
-    no-repeat center center;
-  background-size: cover;
-}
-
-.hero-overlay {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: rgba(0, 0, 0, 0.5);
-  padding: 40px;
-  border-radius: 8px;
-  text-align: center;
-}
-
-.hero-overlay h1 {
-  color: #fff;
-  font-size: 48px;
-  margin-bottom: 20px;
-}
-
-.hero-overlay p {
-  color: #fff;
-  font-size: 20px;
-  margin-bottom: 30px;
-}
-
-.hero-btn {
-  background-color: #5C3D99;
-  color: #fff;
-  border: none;
-  padding: 12px 24px;
-  font-size: 18px;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.hero-btn:hover {
-  background-color: #48307D;
-}
-
-/* SECONDARY SECTION */
-.secondary-section {
-  background-color: #f0f0f0;
-  text-align: center;
-  padding: 60px 20px;
-}
-
-.secondary-section h2 {
-  font-size: 36px;
-  color: #333;
-  margin-bottom: 20px;
-}
-
-.secondary-section p {
-  font-size: 16px;
-  color: #555;
-  margin-bottom: 30px;
-  max-width: 600px;
-  margin: 0 auto 30px;
-}
-
-.secondary-btn {
-  background-color: #007BFF;
-  color: #fff;
-  border: none;
-  padding: 12px 24px;
-  font-size: 18px;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.secondary-btn:hover {
-  background-color: #0056b3;
-}
-
 /* FEATURES SECTION */
 .features-section {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-around;
   padding: 40px 20px;
   background-color: #fafafa;
 }
 
 .feature-item {
-  flex: 1;
-  max-width: 300px;
-  margin: 0 20px;
+  flex: 1 1 300px;
+  margin: 20px;
   text-align: center;
 }
 
@@ -114,46 +30,4 @@
   font-size: 16px;
   color: #555;
   line-height: 1.4;
-}
-
-/* FOOTER */
-.home-footer {
-  background-color: #eee;
-  text-align: center;
-  padding: 20px;
-  color: #666;
-  margin-top: 20px;
-}
-
-/* MEDIA QUERIES FOR MOBILE RESPONSIVENESS */
-@media screen and (max-width: 768px) {
-  .hero {
-    height: 350px;
-  }
-  
-  .hero-overlay h1 {
-    font-size: 32px;
-  }
-  
-  .hero-overlay p {
-    font-size: 16px;
-  }
-  
-  .secondary-section h2 {
-    font-size: 28px;
-  }
-  
-  .secondary-section p {
-    font-size: 14px;
-  }
-  
-  .features-section {
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .feature-item {
-    max-width: 90%;
-    margin: 20px 0;
-  }
 }

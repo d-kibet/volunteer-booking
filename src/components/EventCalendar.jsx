@@ -9,19 +9,21 @@ const EventCalendar = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
+  // Fetch all events from your back end
   const fetchAllEvents = async () => {
     try {
-      const res = await fetch('http://localhost/volunteer-api/get_all_events.php');
-      const data = await res.json();
+      const response = await fetch('http://localhost/volunteer-api/get_all_events.php');
+      const data = await response.json();
+
       if (data.success) {
-        // Transform events to FullCalendar's format
-        const events = data.events.map(event => ({
-          id: event.id,
-          title: event.title,
-          start: event.event_date, // Ensure event_date is in ISO format
+        // Transform events for FullCalendar
+        const events = data.events.map(evt => ({
+          id: evt.id,
+          title: evt.title,
+          start: evt.event_date, // Must be an ISO string
           extendedProps: {
-            description: event.description,
-            location: event.location
+            description: evt.description,
+            location: evt.location
           }
         }));
         setCalendarEvents(events);
@@ -29,7 +31,7 @@ const EventCalendar = () => {
         setError('Failed to load events');
       }
     } catch (err) {
-      console.error(err);
+      console.error('Error fetching events:', err);
       setError('Error fetching events');
     } finally {
       setLoading(false);
@@ -41,10 +43,10 @@ const EventCalendar = () => {
   }, []);
 
   if (loading) {
-    return <p className="loading">Loading calendar...</p>;
+    return <p className="calendar-loading">Loading calendar...</p>;
   }
   if (error) {
-    return <p className="error">{error}</p>;
+    return <p className="calendar-error">{error}</p>;
   }
 
   return (
@@ -55,21 +57,31 @@ const EventCalendar = () => {
         initialView="dayGridMonth"
         events={calendarEvents}
         eventClick={(info) => {
-          // Navigate to event details page when an event is clicked
+          // Example: navigate to details
           window.location.href = `/event/${info.event.id}`;
         }}
         eventDidMount={(info) => {
-          // Define a palette of colors
-          const colors = ['#FFCDD2', '#F8BBD0', '#E1BEE7', '#BBDEFB', '#C8E6C9', '#FFF9C4', '#FFE0B2', '#D7CCC8'];
-          // Pick a random color from the palette
+          // A palette of vibrant colors
+          const colors = [
+            '#FFCDD2', '#F8BBD0', '#E1BEE7', '#D1C4E9',
+            '#C5CAE9', '#BBDEFB', '#B3E5FC', '#B2EBF2',
+            '#B2DFDB', '#C8E6C9', '#DCEDC8', '#F0F4C3',
+            '#FFF9C4', '#FFECB3', '#FFE0B2', '#FFCCBC'
+          ];
+          // Pick a random background color
           const randomColor = colors[Math.floor(Math.random() * colors.length)];
+
+          // Apply styling to the event element
           info.el.style.backgroundColor = randomColor;
           info.el.style.border = '1px solid #fff';
-          // Add transition for smooth animation
+          info.el.style.color = '#333';
+          info.el.style.borderRadius = '4px';
+          info.el.style.padding = '2px 4px';
           info.el.style.transition = 'transform 0.3s ease, box-shadow 0.3s ease';
-          // Add hover effect: scale up and add shadow
+
+          // On hover, scale up and add a shadow
           info.el.addEventListener('mouseover', () => {
-            info.el.style.transform = 'scale(1.05)';
+            info.el.style.transform = 'scale(1.08)';
             info.el.style.boxShadow = '0 4px 8px rgba(0,0,0,0.2)';
           });
           info.el.addEventListener('mouseout', () => {

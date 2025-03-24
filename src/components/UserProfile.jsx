@@ -28,13 +28,13 @@ const UserProfile = () => {
           user_id: user.id,
           name,
           email,
-          password  // Send password (it can be an empty string)
+          password  // Send password (can be empty string if unchanged)
         })
       });
       const data = await res.json();
       setMessage(data.message);
       if (data.success) {
-        // Update the auth context with new user data; password is not returned so keep it unchanged.
+        // Update the auth context with new user data (password not returned, so keep it unchanged).
         const updatedUser = { ...user, name, email };
         login(updatedUser);
       }
@@ -49,35 +49,40 @@ const UserProfile = () => {
   }
 
   return (
-    <div className="user-profile">
-      <h1>Your Profile</h1>
-      <form onSubmit={handleSubmit} className="profile-form">
-        <label>Name:</label>
-        <input 
-          type="text" 
-          value={name} 
-          onChange={(e) => setName(e.target.value)} 
-          required 
-        />
-        
-        <label>Email:</label>
-        <input 
-          type="email" 
-          value={email} 
-          onChange={(e) => setEmail(e.target.value)} 
-          required 
-        />
-        
-        <label>New Password (leave blank to keep current password):</label>
-        <input 
-          type="password" 
-          value={password} 
-          onChange={(e) => setPassword(e.target.value)} 
-        />
-        
-        <button type="submit">Update Profile</button>
-      </form>
-      {message && <p className="profile-message">{message}</p>}
+    <div className="profile-page">
+      <div className="profile-card">
+        <h1 className="profile-heading">Your Profile</h1>
+        <p className="profile-subheading">Update your details below</p>
+
+        <form onSubmit={handleSubmit} className="profile-form">
+          <label>Name:</label>
+          <input 
+            type="text" 
+            value={name} 
+            onChange={(e) => setName(e.target.value)} 
+            required 
+          />
+          
+          <label>Email:</label>
+          <input 
+            type="email" 
+            value={email} 
+            onChange={(e) => setEmail(e.target.value)} 
+            required 
+          />
+          
+          <label>New Password (leave blank to keep current password):</label>
+          <input 
+            type="password" 
+            value={password} 
+            onChange={(e) => setPassword(e.target.value)} 
+          />
+          
+          <button type="submit" className="btn-primary">Update Profile</button>
+        </form>
+
+        {message && <p className="profile-message">{message}</p>}
+      </div>
     </div>
   );
 };

@@ -1,14 +1,293 @@
-/* src/components/Footer.css */
-.footer {
-  background-color: var(--card-bg);
-  color: var(--text-heading);
-  text-align: center;
-  padding: var(--padding-base);
-  box-shadow: 0 -2px 4px rgba(0,0,0,0.1);
-  margin-top: var(--margin-base);
+.footer-container {
+  width: 100%;
+  font-family: 'Raleway', sans-serif;
+  color: white;
+  background-color: #1a1a1a;
 }
 
-.footer p {
+/* Main Footer section */
+.footer-main {
+  padding: 3rem 5%;
+  background-color: #212121;
+  position: relative;
+  overflow: hidden;
+}
+
+.footer-main::before {
+  content: "";
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.03);
+  z-index: 0;
+}
+
+.footer-main::after {
+  content: "";
+  position: absolute;
+  bottom: -60px;
+  left: 10%;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.02);
+  z-index: 0;
+}
+
+.get-in-touch {
+  position: relative;
+  z-index: 1;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.get-in-touch h2 {
+  font-size: 2.2rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+  position: relative;
+  display: inline-block;
+}
+
+.get-in-touch h2::after {
+  content: "";
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 60px;
+  height: 3px;
+  background-color: white;
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.contact-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  transition: transform 0.2s ease-in-out;
+}
+
+.contact-item:hover {
+  transform: translateY(-3px);
+}
+
+.contact-icon {
+  font-size: 1.2rem;
+  margin-top: 4px;
+  color: #f0f0f0;
+}
+
+.contact-item a, .contact-item address {
+  font-style: normal;
+  text-decoration: none;
+  color: #f0f0f0;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.contact-item a:hover {
+  color: white;
+  text-decoration: underline;
+}
+
+/* Social Icons */
+.social-container {
+  margin-bottom: 2.5rem;
+}
+
+.social-container h3 {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
+
+.social-icons {
+  display: flex;
+  gap: 1rem;
+}
+
+.social-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+  font-size: 1.1rem;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.social-icon:hover {
+  background-color: white;
+  color: black;
+  transform: translateY(-3px);
+}
+
+/* Action Buttons */
+.action-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.primary-button, .secondary-button {
+  padding: 0.8rem 1.5rem;
+  border-radius: 4px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 0.9rem;
+  border: none;
+}
+
+.primary-button {
+  background-color: white;
+  color: black;
+}
+
+.primary-button:hover {
+  background-color: #f0f0f0;
+  transform: translateY(-3px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.secondary-button {
+  background-color: transparent;
+  color: white;
+  border: 2px solid white;
+}
+
+.secondary-button:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: translateY(-3px);
+}
+
+/* Footer Bottom */
+.footer-bottom {
+  padding: 2rem 5%;
+  background-color: black;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 1;
+}
+
+.footer-info {
+  flex: 1;
+  min-width: 300px;
+}
+
+.copyright {
+  margin-bottom: 1rem;
+}
+
+.copyright p {
   margin: 0;
-  font-size: var(--font-size-base);
+  font-size: 0.9rem;
+  color: #cccccc;
+}
+
+.legal-text {
+  font-size: 0.75rem;
+  max-width: 600px;
+  margin-top: 0.5rem !important;
+  color: #999999 !important;
+  line-height: 1.4;
+}
+
+.footer-links {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 1.2rem;
+}
+
+.footer-link {
+  color: #e0e0e0;
+  text-decoration: none;
+  font-size: 0.9rem;
+  position: relative;
+  transition: color 0.2s ease;
+}
+
+.footer-link:hover {
+  color: white;
+}
+
+.footer-link::after {
+  content: "";
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: white;
+  transition: width 0.2s ease;
+}
+
+.footer-link:hover::after {
+  width: 100%;
+}
+
+.footer-badges {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.footer-badge {
+  height: 40px;
+  opacity: 0.9;
+  transition: opacity 0.2s ease;
+}
+
+.footer-badge:hover {
+  opacity: 1;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .footer-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+  }
+  
+  .footer-badges {
+    margin-top: 1rem;
+  }
+  
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .action-buttons {
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .primary-button, .secondary-button {
+    width: 100%;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .contact-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }

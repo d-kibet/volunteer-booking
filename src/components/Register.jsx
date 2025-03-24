@@ -9,7 +9,7 @@ const Register = () => {
     name: '', 
     email: '', 
     password: '', 
-    adminCode: ''  // Optional admin code field
+    adminCode: ''
   });
   const [message, setMessage] = useState('');
   const navigate = useNavigate();
@@ -17,6 +17,15 @@ const Register = () => {
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  // Social sign up placeholders
+  const handleGoogleSignUp = () => {
+    console.log('Google sign-up not yet implemented.');
+  };
+
+  const handleFacebookSignUp = () => {
+    console.log('Facebook sign-up not yet implemented.');
   };
 
   const handleSubmit = async (e) => {
@@ -30,9 +39,9 @@ const Register = () => {
       const data = await response.json();
       setMessage(data.message);
       if (data.success) {
-        // Automatically log the user in using the returned user data
+        // Auto-login
         login(data.user);
-        // Redirect to home page after a brief delay
+        // Redirect
         setTimeout(() => {
           navigate('/');
         }, 1500);
@@ -45,47 +54,58 @@ const Register = () => {
 
   return (
     <div className="register-page">
-      <h1>Register</h1>
-      <form onSubmit={handleSubmit} className="register-form">
-        <label>Name:</label>
-        <input 
-          type="text" 
-          name="name" 
-          value={formData.name} 
-          onChange={handleChange} 
-          required 
-        />
-        
-        <label>Email:</label>
-        <input 
-          type="email" 
-          name="email" 
-          value={formData.email} 
-          onChange={handleChange} 
-          required 
-        />
-        
-        <label>Password:</label>
-        <input 
-          type="password" 
-          name="password" 
-          value={formData.password} 
-          onChange={handleChange} 
-          required 
-        />
-        
-        <label>Admin Code (optional):</label>
-        <input 
-          type="text" 
-          name="adminCode" 
-          value={formData.adminCode} 
-          onChange={handleChange} 
-          placeholder="Enter admin code if applicable"
-        />
-        
-        <button type="submit">Register</button>
-      </form>
-      {message && <p className="register-message">{message}</p>}
+      <div className="register-card">
+        <h1 className="register-heading">Register</h1>
+        <p className="register-subheading">Create your account and start volunteering!</p>
+
+        <form onSubmit={handleSubmit} className="register-form">
+          <label>Name:</label>
+          <input 
+            type="text" 
+            name="name" 
+            value={formData.name} 
+            onChange={handleChange} 
+            required 
+          />
+          
+          <label>Email:</label>
+          <input 
+            type="email" 
+            name="email" 
+            value={formData.email} 
+            onChange={handleChange} 
+            required 
+          />
+          
+          <label>Password:</label>
+          <input 
+            type="password" 
+            name="password" 
+            value={formData.password} 
+            onChange={handleChange} 
+            required 
+          />
+          
+          <label>Admin Code (optional):</label>
+          <input 
+            type="text" 
+            name="adminCode" 
+            value={formData.adminCode} 
+            onChange={handleChange} 
+            placeholder="Enter admin code if applicable"
+          />
+          
+          <button type="submit" className="btn-primary">Register</button>
+        </form>
+
+        {message && <p className="register-message">{message}</p>}
+
+        <div className="social-register">
+          <p>Or sign up with:</p>
+          <button className="google-btn" onClick={handleGoogleSignUp}>Google</button>
+          <button className="facebook-btn" onClick={handleFacebookSignUp}>Facebook</button>
+        </div>
+      </div>
     </div>
   );
 };

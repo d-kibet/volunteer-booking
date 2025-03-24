@@ -22,7 +22,7 @@ const Header = () => {
   return (
     <header className="header">
       <div className="container">
-        <div className="logo">Uplink</div>
+        <div className="logo">Uplift</div>
 
         {/* Hamburger icon for mobile */}
         <div

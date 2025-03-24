@@ -1,146 +1,205 @@
 // src/components/EventList.jsx
-import React, { useState, useEffect, useContext } from 'react';
-import { Link } from 'react-router-dom';
-import { AuthContext } from '../AuthContext';
+import React, { useState, useEffect } from 'react';
 import './EventList.css';
 
 const EventList = () => {
-  // State for events, pagination, loading, errors, etc.
   const [events, setEvents] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
-  const [message, setMessage] = useState('');
-  
-  // Auth context for booking
-  const { user } = useContext(AuthContext);
 
-  // Fetch events from the paginated endpoint
-  const fetchEvents = async (page) => {
-    setLoading(true);
+  // Search/filter states
+  const [searchTerm, setSearchTerm] = useState('');
+  const [category, setCategory] = useState('All Categories');
+  const [anyDate, setAnyDate] = useState('Any Date');
+
+  // Pagination states
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 9;
+
+  // Fetch events from the API
+  const fetchEvents = async () => {
     try {
-      const res = await fetch(`http://localhost/volunteer-api/get_events.php?page=${page}`);
+      const res = await fetch('http://localhost/volunteer-api/get_events.php');
       const data = await res.json();
       if (data.success) {
         setEvents(data.events);
-        setCurrentPage(data.currentPage);
-        setTotalPages(data.totalPages);
       } else {
-        setError('Failed to load events.');
+        setError('Failed to load events');
       }
     } catch (err) {
       console.error(err);
-      setError('Error fetching events.');
+      setError('Error fetching events');
     } finally {
       setLoading(false);
     }
   };
 
-  // Initial and subsequent fetch when currentPage changes
   useEffect(() => {
-    fetchEvents(currentPage);
-    // eslint-disable-next-line
-  }, [currentPage]);
+    fetchEvents();
+  }, []);
 
-  // Handle event booking
-  const handleBookEvent = async (eventId) => {
-    if (!user) {
-      setMessage('Please log in to book an event.');
-      return;
+  // Derive filtered events
+  const filteredEvents = events.filter((event) => {
+    // text search in title or description
+    const searchMatch =
+      event.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      event.description.toLowerCase().includes(searchTerm.toLowerCase());
+
+    // category match
+    const categoryMatch =
+      category === 'All Categories' || event.category === category;
+
+    // date filter
+    let dateMatch = true;
+    const eventDate = new Date(event.event_date);
+    const now = new Date();
+
+    if (anyDate === 'This Week') {
+      const weekLater = new Date();
+      weekLater.setDate(now.getDate() + 7);
+      dateMatch = eventDate >= now && eventDate <= weekLater;
+    } else if (anyDate === 'This Month') {
+      dateMatch =
+        eventDate.getMonth() === now.getMonth() &&
+        eventDate.getFullYear() === now.getFullYear();
+    } else if (anyDate === 'Next Month') {
+      const nextMonth = new Date(now.getFullYear(), now.getMonth() + 1, 1);
+      const monthAfterNext = new Date(now.getFullYear(), now.getMonth() + 2, 1);
+      dateMatch = eventDate >= nextMonth && eventDate < monthAfterNext;
     }
-    try {
-      const response = await fetch('http://localhost/volunteer-api/book_event.php', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ user_id: user.id, event_id: eventId })
-      });
-      const data = await response.json();
-      setMessage(data.message);
-    } catch (error) {
-      console.error('Booking error:', error);
-      setMessage('Error connecting to the server.');
+
+    return searchMatch && categoryMatch && dateMatch;
+  });
+
+  // Pagination calculations
+  const totalPages = Math.ceil(filteredEvents.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const currentEvents = filteredEvents.slice(startIndex, endIndex);
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
+
+  const handleNext = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
     }
   };
 
-  // Render pagination buttons
-  const renderPagination = () => {
-    if (totalPages <= 1) return null; // No pagination needed if only 1 page
-
-    const pages = [];
-    for (let i = 1; i <= totalPages; i++) {
-      pages.push(
-        <button
-          key={i}
-          className={`page-btn ${i === currentPage ? 'active' : ''}`}
-          onClick={() => setCurrentPage(i)}
-        >
-          {i}
-        </button>
-      );
+  const handlePrev = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
     }
+  };
 
-    return (
-      <div className="pagination">
-        {currentPage > 1 && (
-          <button className="page-btn" onClick={() => setCurrentPage(currentPage - 1)}>
-            Prev
-          </button>
-        )}
-        {pages}
-        {currentPage < totalPages && (
-          <button className="page-btn" onClick={() => setCurrentPage(currentPage + 1)}>
-            Next
-          </button>
-        )}
-      </div>
-    );
+  // Click handlers
+  const handleImageClick = (id) => {
+    window.location.href = `/event/${id}`;
+  };
+
+  const handleBookNow = (id) => {
+    // Navigate to details or booking page
+    window.location.href = `/event/${id}`;
   };
 
   if (loading) {
-    return <p style={{ padding: '20px' }}>Loading events...</p>;
+    return <p className="loading">Loading events...</p>;
   }
   if (error) {
-    return <p style={{ padding: '20px' }}>{error}</p>;
+    return <p className="error">{error}</p>;
   }
 
   return (
-    <div className="paginated-event-list">
+    <div className="events-page">
       <h1>Volunteer Opportunities</h1>
-      {message && <p style={{ padding: '20px', color: 'green' }}>{message}</p>}
+      <p>Find and join volunteering opportunities in your community</p>
 
-      {events.length === 0 ? (
-        <p>No events available at the moment.</p>
-      ) : (
-        <div className="grid-container">
-          {events.map((event) => (
-            <div key={event.id} className="grid-item">
-              <span className="opportunity-label">OPPORTUNITY</span>
-              {/* Clicking the title/image leads to details page */}
-              <Link to={`/event/${event.id}`} className="event-tile">
-                <h2>{event.title}</h2>
-                {event.image && <img src={event.image} alt={event.title} />}
-              </Link>
+      {/* FILTER BAR */}
+      <div className="filter-bar">
+        <input
+          type="text"
+          placeholder="Search events..."
+          value={searchTerm}
+          onChange={(e) => {
+            setSearchTerm(e.target.value);
+            setCurrentPage(1);
+          }}
+        />
 
-              <p>{event.description}</p>
-              <p>
-                <strong>Date:</strong> {new Date(event.event_date).toLocaleString()}
-              </p>
-              {event.location && (
-                <p>
-                  <strong>Location:</strong> {event.location}
-                </p>
-              )}
+        <select
+          value={category}
+          onChange={(e) => {
+            setCategory(e.target.value);
+            setCurrentPage(1);
+          }}
+        >
+          <option>All Categories</option>
+          <option>Outdoor</option>
+          <option>Community</option>
+          <option>Education</option>
+          <option>Health</option>
+        </select>
 
-              <button className="btn-book" onClick={() => handleBookEvent(event.id)}>
-                Book Now
+        <select
+          value={anyDate}
+          onChange={(e) => {
+            setAnyDate(e.target.value);
+            setCurrentPage(1);
+          }}
+        >
+          <option>Any Date</option>
+          <option>This Week</option>
+          <option>This Month</option>
+          <option>Next Month</option>
+        </select>
+      </div>
+
+      {/* GRID LAYOUT */}
+      <div className="grid-container">
+        {currentEvents.map((event) => (
+          <div key={event.id} className="grid-item">
+           
+            <h2 className="event-title">{event.title}</h2>
+            {event.image && (
+              <img
+                src={event.image}
+                alt={event.title}
+                className="event-image"
+                onClick={() => handleImageClick(event.id)}
+              />
+            )}
+            <p className="event-description">{event.description}</p>
+            <p className="event-date">
+              <strong>Date:</strong> {new Date(event.event_date).toLocaleString()}
+            </p>
+            <p className="event-location">
+              <strong>Location:</strong> {event.location}
+            </p>
+            <button className="btn-book" onClick={() => handleBookNow(event.id)}>Book Now</button>
+          </div>
+        ))}
+      </div>
+
+      {/* PAGINATION CONTROLS */}
+      {totalPages > 1 && (
+        <div className="pagination-controls">
+          <button onClick={handlePrev} disabled={currentPage === 1}>Previous</button>
+          {[...Array(totalPages)].map((_, index) => {
+            const page = index + 1;
+            return (
+              <button
+                key={page}
+                onClick={() => handlePageChange(page)}
+                className={page === currentPage ? 'active-page' : ''}
+              >
+                {page}
               </button>
-            </div>
-          ))}
+            );
+          })}
+          <button onClick={handleNext} disabled={currentPage === totalPages}>Next</button>
         </div>
       )}
-
-      {renderPagination()}
     </div>
   );
 };

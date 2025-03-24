@@ -13,7 +13,34 @@
   color: #333;
 }
 
-/* Optional: Customize FullCalendar's default styling */
+.calendar-loading,
+.calendar-error {
+  font-size: 16px;
+  margin-top: 20px;
+  color: #555;
+}
+
+/* Customize FullCalendar's default styling */
 .fc {
   font-size: 14px;
+}
+
+/* Optionally style day cells or event text further */
+.fc-daygrid-event {
+  font-weight: 500;
+  font-size: 0.875rem; /* 14px */
+  cursor: pointer;
+  border-radius: 4px;
+  overflow: hidden;
+  line-height: 1.2;
+}
+
+/* Adjust spacing within events */
+.fc-daygrid-event > .fc-event-main {
+  padding: 2px 4px;
+}
+
+/* Example: style the day cells on hover (optional) */
+.fc-daygrid-day:hover {
+  background-color: #fafafa;
 }

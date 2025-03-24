@@ -1,47 +1,57 @@
 /* src/components/Hero.css */
-.hero {
+.hero-section {
   position: relative;
   width: 100%;
-  height: 500px;
+  min-height: 60vh; /* Adjust to taste, or use a fixed height like 500px */
   background: url('https://images.unsplash.com/photo-1573164574395-9e29717c7f6b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&q=80')
     no-repeat center center;
   background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.hero-overlay {
+/* Subtle dark overlay */
+.hero-section::before {
+  content: "";
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay for readability */
-  padding: 40px;
-  border-radius: 8px;
-  text-align: center;
+  inset: 0; /* top:0; right:0; bottom:0; left:0; */
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 0;
 }
 
-.hero h1 {
+/* Centered content above overlay */
+.hero-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
   color: #fff;
+  max-width: 600px;
+  margin: 0 20px;
+}
+
+.hero-content h1 {
   font-size: 48px;
   margin-bottom: 20px;
 }
 
-.hero p {
-  color: #fff;
+.hero-content p {
   font-size: 20px;
   margin-bottom: 30px;
 }
 
+/* Get Started Button */
 .hero-btn {
-  background-color: #5C3D99; /* or var(--btn-primary-bg) if using theme.css */
+  background-color: #5C3D99;
   color: #fff;
   border: none;
   padding: 12px 24px;
   font-size: 18px;
-  border-radius: 8px; /* or var(--border-radius) */
+  border-radius: 8px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
 .hero-btn:hover {
-  background-color: #48307D; /* or var(--btn-primary-hover-bg) */
+  background-color: #48307D;
 }

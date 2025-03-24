@@ -1,54 +1,121 @@
 /* src/components/Register.css */
-.register-page {
-    padding: 40px 20px;
-    max-width: 600px;
-    margin: 0 auto;
-    text-align: center;
-    font-family: Arial, sans-serif;
-  }
-  
-  .register-page h1 {
-    margin-bottom: 20px;
-    color: #333;
-  }
-  
-  .register-form {
-    display: flex;
-    flex-direction: column;
-    text-align: left;
-  }
-  
-  .register-form label {
-    margin: 10px 0 5px;
-    font-weight: bold;
-    color: #444;
-  }
-  
-  .register-form input {
-    padding: 10px;
-    font-size: 16px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  .register-form button {
-    padding: 12px;
-    font-size: 16px;
-    background-color: #007BFF;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  .register-form button:hover {
-    background-color: #0056b3;
-  }
-  
-  .register-message {
-    margin-top: 20px;
-    font-size: 16px;
-    color: green;
-  }
 
+/* Overall Page Layout */
+.register-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 60px 20px;
+  background-color: #f3f3f3; 
+  font-family: Arial, sans-serif;
+}
+
+/* Card Container */
+.register-card {
+  background-color: #fff;
+  width: 100%;
+  max-width: 500px;
+  padding: 40px 30px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+/* Heading & Subheading */
+.register-heading {
+  margin-bottom: 10px;
+  font-size: 28px;
+  color: #333;
+}
+
+.register-subheading {
+  font-size: 16px;
+  color: #555;
+  margin-bottom: 30px;
+}
+
+/* Form */
+.register-form {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+.register-form label {
+  margin: 10px 0 5px;
+  font-weight: bold;
+  color: #444;
+}
+
+.register-form input {
+  padding: 12px;
+  font-size: 16px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Primary Button */
+.btn-primary {
+  width: 100%;
+  padding: 12px;
+  background-color: #007BFF;
+  color: #fff;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+}
+
+.register-message {
+  margin-top: 20px;
+  font-size: 16px;
+  color: green;
+}
+
+/* Social Register */
+.social-register {
+  margin-top: 20px;
+}
+
+.social-register p {
+  margin-bottom: 10px;
+  font-size: 14px;
+  color: #555;
+}
+
+.google-btn,
+.facebook-btn {
+  display: inline-block;
+  margin: 5px 10px;
+  padding: 10px 20px;
+  font-size: 14px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  color: #fff;
+  transition: opacity 0.3s ease;
+}
+
+.google-btn {
+  background-color: #DB4437; /* Google Red */
+}
+
+.google-btn:hover {
+  opacity: 0.8;
+}
+
+.facebook-btn {
+  background-color: #4267B2; /* Facebook Blue */
+}
+
+.facebook-btn:hover {
+  opacity: 0.8;
+}

@@ -13,8 +13,10 @@ import AdminDashboard from './components/AdminDashboard';
 import AdminStatistics from './components/AdminStatistics';
 import EventList from './components/EventList';
 import EventDetails from './components/EventDetails';
+import EventCalendar from './components/EventCalendar';
 import ProtectedRoute from './components/ProtectedRoute';
 import AdminProtectedRoute from './components/AdminProtectedRoute';
+import ForgotPassword from './components/ForgotPassword';
 import Footer from './components/Footer';
 
 function App() {
@@ -49,7 +51,9 @@ function App() {
               <AdminStatistics />
             </AdminProtectedRoute>
           } />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/events" element={<EventList />} />
+          <Route path="/calendar" element={<EventCalendar />} />
           <Route path="/event/:id" element={<EventDetails />} />
         </Routes>
         <Footer />
