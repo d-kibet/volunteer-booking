@@ -9,7 +9,7 @@ const Hero = ({ onGetStarted }) => {
         <h1>Welcome to Our Volunteer Platform</h1>
         <p>Empowering communities through service and engagement.</p>
         <button className="hero-btn" onClick={onGetStarted}>
-          Get Started
+         Become A Volunteer
         </button>
       </div>
     </section>
