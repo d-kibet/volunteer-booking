@@ -15,7 +15,7 @@ const Footer = () => {
             </div>
             <div className="contact-item">
               <FaEnvelope className="contact-icon" />
-              <a href="mailto:info@volunteeringmatters.org.uk">info@volunteeringmatters.org.uk</a>
+              <a href="mailto:info@volunteeringmatters.org.uk">info@upliftsupport.com</a>
             </div>
             <div className="contact-item">
               <FaMapMarkerAlt className="contact-icon" />
@@ -44,8 +44,8 @@ const Footer = () => {
       <div className="footer-bottom">
         <div className="footer-info">
           <div className="copyright">
-            <p>© 2025 Volunteering Matters.</p>
-            <p className="legal-text">Volunteering Matters is a registered charity in England and Wales no. 291222 and in Scotland no. SC039171. Volunteering Matters is a company limited by guarantee no. 1435877.</p>
+            <p>© 2025 Uplift Volunteering.</p>
+            <p className="legal-text">Uplift Volunteering is a registered charity in Nigeria. Uplift Volunteering is a company limited by guarantee no. 9036387.</p>
           </div>
           
           <div className="footer-links">

@@ -5,7 +5,8 @@ import './UserProfile.css';
 
 const UserProfile = () => {
   const { user, login } = useContext(AuthContext);
-  const [name, setName] = useState(user ? user.name : '');
+  const [firstName, setFirstName] = useState(user ? user.first_name : '');
+  const [lastName, setLastName] = useState(user ? user.last_name : '');
   const [email, setEmail] = useState(user ? user.email : '');
   const [password, setPassword] = useState(''); // New password field
   const [message, setMessage] = useState('');
@@ -13,7 +14,8 @@ const UserProfile = () => {
   // Update form fields when the user changes
   useEffect(() => {
     if (user) {
-      setName(user.name);
+      setFirstName(user.first_name);
+      setLastName(user.last_name);
       setEmail(user.email);
     }
   }, [user]);
@@ -26,7 +28,8 @@ const UserProfile = () => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           user_id: user.id,
-          name,
+          first_name: firstName,
+          last_name: lastName,
           email,
           password  // Send password (can be empty string if unchanged)
         })
@@ -34,8 +37,8 @@ const UserProfile = () => {
       const data = await res.json();
       setMessage(data.message);
       if (data.success) {
-        // Update the auth context with new user data (password not returned, so keep it unchanged).
-        const updatedUser = { ...user, name, email };
+        // Update the auth context with new user data
+        const updatedUser = { ...user, first_name: firstName, last_name: lastName, email };
         login(updatedUser);
       }
     } catch (err) {
@@ -55,14 +58,22 @@ const UserProfile = () => {
         <p className="profile-subheading">Update your details below</p>
 
         <form onSubmit={handleSubmit} className="profile-form">
-          <label>Name:</label>
+          <label>First Name:</label>
           <input 
             type="text" 
-            value={name} 
-            onChange={(e) => setName(e.target.value)} 
+            value={firstName} 
+            onChange={(e) => setFirstName(e.target.value)} 
             required 
           />
           
+          <label>Last Name:</label>
+          <input 
+            type="text" 
+            value={lastName} 
+            onChange={(e) => setLastName(e.target.value)} 
+            required 
+          />
+
           <label>Email:</label>
           <input 
             type="email" 

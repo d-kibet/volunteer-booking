@@ -10,17 +10,6 @@ const Login = () => {
   const { login } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  // For demonstration only
-  const handleGoogleLogin = () => {
-    console.log('Google login not yet implemented.');
-    // Here you'd integrate Google OAuth or redirect to your server's OAuth endpoint
-  };
-
-  const handleFacebookLogin = () => {
-    console.log('Facebook login not yet implemented.');
-    // Here you'd integrate Facebook OAuth or redirect to your server's OAuth endpoint
-  };
-
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -35,6 +24,7 @@ const Login = () => {
       });
       const data = await response.json();
       if (data.success) {
+        // Update auth context with first and last names returned from back end
         login(data.user);
         setMessage('Login successful!');
         navigate('/dashboard');
@@ -78,12 +68,6 @@ const Login = () => {
         </form>
 
         {message && <p className="login-message">{message}</p>}
-
-        <div className="social-login">
-          <p>Or sign in with:</p>
-          <button className="google-btn" onClick={handleGoogleLogin}>Google</button>
-          <button className="facebook-btn" onClick={handleFacebookLogin}>Facebook</button>
-        </div>
       </div>
     </div>
   );

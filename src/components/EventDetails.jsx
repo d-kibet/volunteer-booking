@@ -18,7 +18,7 @@ const EventDetails = () => {
   const [feedbackMsg, setFeedbackMsg] = useState('');
 
   const fetchEventDetails = () => {
-    fetch(`http://localhost/volunteer-api/get_event.php?id=${id}`)
+    fetch(`http://localhost/volunteer-api/get_events.php?id=${id}`)
       .then(response => response.json())
       .then(data => {
         if (data.success) {

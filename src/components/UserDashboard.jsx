@@ -71,7 +71,7 @@ const UserDashboard = () => {
 
   return (
     <div className="user-dashboard">
-      <h1>{user.name}'s Dashboard</h1>
+      <h1>{user.first_name} {user.last_name}'s Dashboard</h1>
       <h2>Your Registered Events</h2>
       {message && <p className="dashboard-message">{message}</p>}
       {error && <p className="dashboard-error">{error}</p>}
