@@ -17,11 +17,11 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost/volunteer-api/login.php', {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/login.php`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)
-      });
+      });      
       const data = await response.json();
       if (data.success) {
         // Update auth context with first and last names returned from back end

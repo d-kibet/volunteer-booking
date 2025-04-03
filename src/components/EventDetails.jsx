@@ -18,7 +18,7 @@ const EventDetails = () => {
   const [feedbackMsg, setFeedbackMsg] = useState('');
 
   const fetchEventDetails = () => {
-    fetch(`http://localhost/volunteer-api/get_events.php?id=${id}`)
+    fetch(`${process.env.REACT_APP_API_URL}/get_events.php?id=${id}`)
       .then(response => response.json())
       .then(data => {
         if (data.success) {
@@ -51,7 +51,7 @@ const EventDetails = () => {
       return;
     }
     try {
-      const response = await fetch('http://localhost/volunteer-api/book_event.php', {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/book_event.php`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ user_id: user.id, event_id: event.id })
@@ -76,7 +76,7 @@ const EventDetails = () => {
       return;
     }
     try {
-      const response = await fetch('http://localhost/volunteer-api/submit_rating.php', {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/submit_rating.php`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -103,8 +103,12 @@ const EventDetails = () => {
     return <p className="loading">Loading event details...</p>;
   }
 
-  if (error || !event) {
-    return <p className="error">{error || 'Event not found.'}</p>;
+  if (error) {
+    return <p className="error">{error}</p>;
+  }
+
+  if (!event) {
+    return <p className="error">Event not found.</p>;
   }
 
   return (
@@ -115,7 +119,9 @@ const EventDetails = () => {
         <h1 className="event-title">{event.title}</h1>
         {event.image && <img className="event-image" src={event.image} alt={event.title} />}
         <p className="event-description">{event.description}</p>
-        <p className="event-date"><strong>Date:</strong> {new Date(event.event_date).toLocaleString()}</p>
+        <p className="event-date">
+          <strong>Date:</strong> {new Date(event.event_date).toLocaleString()}
+        </p>
         {event.location && <p className="event-location"><strong>Location:</strong> {event.location}</p>}
         <button className="btn-book" onClick={handleBookEvent}>Book Now</button>
         {bookingMessage && <p className="booking-message">{bookingMessage}</p>}

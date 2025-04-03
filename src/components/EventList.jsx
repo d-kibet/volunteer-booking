@@ -19,7 +19,7 @@ const EventList = () => {
   // Fetch events from the API
   const fetchEvents = async () => {
     try {
-      const res = await fetch('http://localhost/volunteer-api/get_events.php');
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/get_event.php?page=1`);
       const data = await res.json();
       if (data.success) {
         setEvents(data.events);

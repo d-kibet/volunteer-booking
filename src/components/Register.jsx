@@ -42,17 +42,15 @@ const Register = () => {
     }
 
     try {
-      const response = await fetch('http://localhost/volunteer-api/register.php', {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/register.php`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          first_name: formData.firstName,
+        body: JSON.stringify({  first_name: formData.firstName,
           last_name: formData.lastName,
           email: formData.email,
           password: formData.password,
-          adminCode: formData.adminCode
-        })
-      });
+          adminCode: formData.adminCode })
+      });      
       const data = await response.json();
       setMessage(data.message);
       if (data.success) {
