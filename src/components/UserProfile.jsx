@@ -11,7 +11,6 @@ const UserProfile = () => {
   const [password, setPassword] = useState(''); // New password field
   const [message, setMessage] = useState('');
 
-  // Update form fields when the user changes
   useEffect(() => {
     if (user) {
       setFirstName(user.first_name);
@@ -23,7 +22,7 @@ const UserProfile = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch('http://localhost/volunteer-api/update_profile.php', {
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/update_profile.php`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -37,7 +36,6 @@ const UserProfile = () => {
       const data = await res.json();
       setMessage(data.message);
       if (data.success) {
-        // Update the auth context with new user data
         const updatedUser = { ...user, first_name: firstName, last_name: lastName, email };
         login(updatedUser);
       }
@@ -56,7 +54,6 @@ const UserProfile = () => {
       <div className="profile-card">
         <h1 className="profile-heading">Your Profile</h1>
         <p className="profile-subheading">Update your details below</p>
-
         <form onSubmit={handleSubmit} className="profile-form">
           <label>First Name:</label>
           <input 
@@ -65,7 +62,6 @@ const UserProfile = () => {
             onChange={(e) => setFirstName(e.target.value)} 
             required 
           />
-          
           <label>Last Name:</label>
           <input 
             type="text" 
@@ -73,7 +69,6 @@ const UserProfile = () => {
             onChange={(e) => setLastName(e.target.value)} 
             required 
           />
-
           <label>Email:</label>
           <input 
             type="email" 
@@ -81,17 +76,14 @@ const UserProfile = () => {
             onChange={(e) => setEmail(e.target.value)} 
             required 
           />
-          
           <label>New Password (leave blank to keep current password):</label>
           <input 
             type="password" 
             value={password} 
             onChange={(e) => setPassword(e.target.value)} 
           />
-          
           <button type="submit" className="btn-primary">Update Profile</button>
         </form>
-
         {message && <p className="profile-message">{message}</p>}
       </div>
     </div>

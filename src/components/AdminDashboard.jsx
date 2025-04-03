@@ -17,7 +17,7 @@ const AdminDashboard = () => {
 
   // Fetch events from the backend
   const fetchEvents = () => {
-    fetch('http://localhost/volunteer-api/get_events.php')
+    fetch(`${process.env.REACT_APP_API_URL}/get_events.php`)
       .then(response => response.json())
       .then(data => {
         if (data.success) {
@@ -45,7 +45,7 @@ const AdminDashboard = () => {
   const handleCreateEvent = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost/volunteer-api/create_event.php', {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/create_event.php`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)
@@ -65,7 +65,7 @@ const AdminDashboard = () => {
   // Handle deletion of an event
   const handleDelete = async (eventId) => {
     try {
-      const response = await fetch('http://localhost/volunteer-api/delete_event.php', {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/delete_event.php`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ id: eventId })
@@ -98,7 +98,7 @@ const AdminDashboard = () => {
   const handleUpdateEvent = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost/volunteer-api/update_event.php', {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/update_event.php`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)
@@ -128,19 +128,14 @@ const AdminDashboard = () => {
               <form onSubmit={handleUpdateEvent} className="event-form">
                 <label>Title:</label>
                 <input type="text" name="title" value={formData.title} onChange={handleChange} required />
-
                 <label>Description:</label>
                 <textarea name="description" value={formData.description} onChange={handleChange} required></textarea>
-
                 <label>Event Date:</label>
                 <input type="datetime-local" name="event_date" value={formData.event_date} onChange={handleChange} required />
-
                 <label>Location:</label>
                 <input type="text" name="location" value={formData.location} onChange={handleChange} />
-
                 <label>Image URL:</label>
                 <input type="text" name="image" value={formData.image} onChange={handleChange} />
-
                 <button type="submit">Update Event</button>
                 <button type="button" onClick={() => {
                   setEditingEvent(null);
@@ -154,19 +149,14 @@ const AdminDashboard = () => {
               <form onSubmit={handleCreateEvent} className="event-form">
                 <label>Title:</label>
                 <input type="text" name="title" value={formData.title} onChange={handleChange} required />
-
                 <label>Description:</label>
                 <textarea name="description" value={formData.description} onChange={handleChange} required></textarea>
-
                 <label>Event Date:</label>
                 <input type="datetime-local" name="event_date" value={formData.event_date} onChange={handleChange} required />
-
                 <label>Location:</label>
                 <input type="text" name="location" value={formData.location} onChange={handleChange} />
-
                 <label>Image URL:</label>
                 <input type="text" name="image" value={formData.image} onChange={handleChange} />
-
                 <button type="submit">Create Event</button>
               </form>
             </>

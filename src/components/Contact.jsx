@@ -13,8 +13,7 @@ const Contact = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // Replace with your actual endpoint if needed
-      const res = await fetch("http://localhost/volunteer-api/contact.php", {
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/contact.php`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData)

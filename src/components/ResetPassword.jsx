@@ -20,7 +20,7 @@ const ResetPassword = () => {
     e.preventDefault();
     if (!token) return;
     try {
-      const res = await fetch('http://localhost/volunteer-api/reset_password.php', {
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/reset_password.php`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ token, password })
@@ -39,7 +39,6 @@ const ResetPassword = () => {
         <h1>Reset Password</h1>
         <p>Enter a new password for your account.</p>
         {message && <p className="reset-password-message">{message}</p>}
-
         <form onSubmit={handleSubmit} className="reset-password-form">
           <label>New Password:</label>
           <input 

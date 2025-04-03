@@ -9,7 +9,7 @@ const AdminStatistics = () => {
 
   const fetchStats = async () => {
     try {
-      const response = await fetch('http://localhost/volunteer-api/get_statistics.php');
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/get_statistics.php`);
       const data = await response.json();
       if (data.success) {
         setStats(data);

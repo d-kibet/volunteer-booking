@@ -16,7 +16,7 @@ const UserDashboard = () => {
       setLoading(false);
       return;
     }
-    fetch('http://localhost/volunteer-api/get_user_registrations.php', {
+    fetch(`${process.env.REACT_APP_API_URL}/get_user_registrations.php`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ user_id: user.id })
@@ -37,7 +37,6 @@ const UserDashboard = () => {
       });
   }, [user]);
 
-  // Now use fetchRegistrations as a dependency
   useEffect(() => {
     fetchRegistrations();
   }, [fetchRegistrations]);
@@ -45,7 +44,7 @@ const UserDashboard = () => {
   // Function to cancel a booking
   const handleCancelBooking = async (eventId) => {
     try {
-      const response = await fetch('http://localhost/volunteer-api/cancel_registration.php', {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/cancel_registration.php`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ user_id: user.id, event_id: eventId })

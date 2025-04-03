@@ -9,10 +9,10 @@ const EventCalendar = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
-  // Fetch all events from your back end
+  // Fetch all events from your back end using environment variable
   const fetchAllEvents = async () => {
     try {
-      const response = await fetch('http://localhost/volunteer-api/get_all_events.php');
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/get_all_events.php`);
       const data = await response.json();
 
       if (data.success) {
