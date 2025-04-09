@@ -2,6 +2,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { AuthContext } from '../AuthContext';
+import AddToCalendar from './AddToCalendar';
 import './EventDetails.css';
 
 const EventDetails = () => {
@@ -31,7 +32,7 @@ const EventDetails = () => {
         setLoading(false);
       })
       .catch(err => {
-        console.error(err);
+        console.error('Error fetching event details:', err);
         setError('Error fetching event details.');
         setLoading(false);
       });
@@ -42,7 +43,7 @@ const EventDetails = () => {
     fetchEventDetails();
   }, [id]);
 
-  // Determine if the event has ended
+  // Determine if the event has ended (only after the event_date has passed)
   const eventHasEnded = event && new Date(event.event_date) < new Date();
 
   // Handle event booking
@@ -123,7 +124,9 @@ const EventDetails = () => {
         <p className="event-date">
           <strong>Date:</strong> {new Date(event.event_date).toLocaleString()}
         </p>
-        {event.location && <p className="event-location"><strong>Location:</strong> {event.location}</p>}
+        {event.location && (
+          <p className="event-location"><strong>Location:</strong> {event.location}</p>
+        )}
         <button className="btn-book" onClick={handleBookEvent}>Book Now</button>
         {bookingMessage && <p className="booking-message">{bookingMessage}</p>}
       </div>
@@ -134,8 +137,9 @@ const EventDetails = () => {
         {eventHasEnded ? (
           <>
             <h2>Event Rating & Feedback</h2>
-            {avgRating !== null && <p className="avg-rating">Average Rating: {avgRating} / 5</p>}
-            
+            {avgRating !== null && (
+              <p className="avg-rating">Average Rating: {avgRating} / 5</p>
+            )}
             <div className="rating-form">
               <p className="note">
                 Note: Submitting your rating again will update your previous feedback.
@@ -159,7 +163,6 @@ const EventDetails = () => {
               <button className="btn-submit-rating" onClick={handleSubmitRating}>Submit Rating</button>
               {feedbackMsg && <p className="feedback-message">{feedbackMsg}</p>}
             </div>
-            
             <div className="comments-section">
               <h3>Feedback from Others</h3>
               {comments && comments.length > 0 ? (
@@ -182,6 +185,9 @@ const EventDetails = () => {
           </div>
         )}
       </div>
+
+      {/* Add to Calendar Section */}
+      <AddToCalendar event={event} />
     </div>
   );
 };

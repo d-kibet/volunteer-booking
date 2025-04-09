@@ -1,0 +1,49 @@
+/* src/components/SocialLogin.css */
+
+/* Container that holds both social buttons side-by-side */
+.social-login-container {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    gap: 1rem;
+  }
+  
+  /* Common styling for both social buttons */
+  .social-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    color: #fff;
+    padding: 10px 14px;
+    transition: background-color 0.3s ease;
+    text-transform: none;
+  }
+  
+  /* Icon inside each button */
+  .social-btn-icon {
+    font-size: 18px;
+  }
+  
+  /* Google styling */
+  .google-btn {
+    background-color: #DB4437; /* Google Red */
+  }
+  
+  .google-btn:hover {
+    background-color: #c3372b;
+  }
+  
+  /* Facebook styling */
+  .facebook-btn {
+    background-color: #4267B2; /* Facebook Blue */
+  }
+  
+  .facebook-btn:hover {
+    background-color: #365899;
+  }
+  

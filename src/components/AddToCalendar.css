@@ -1,0 +1,33 @@
+/* src/components/AddToCalendar.css */
+.add-to-calendar {
+    margin-top: 20px;
+    padding: 10px;
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  
+  .add-to-calendar h3 {
+    margin-bottom: 10px;
+    font-size: 18px;
+  }
+  
+  .add-to-calendar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .add-to-calendar li {
+    margin-bottom: 5px;
+  }
+  
+  .add-to-calendar a {
+    color: #007BFF;
+    text-decoration: none;
+  }
+  
+  .add-to-calendar a:hover {
+    text-decoration: underline;
+  }
+  

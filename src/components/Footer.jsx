@@ -1,4 +1,6 @@
+// src/components/Footer.jsx
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaTwitter, FaInstagram, FaFacebook, FaLinkedin, FaYoutube } from 'react-icons/fa';
 import './Footer.css';
 
@@ -15,7 +17,7 @@ const Footer = () => {
             </div>
             <div className="contact-item">
               <FaEnvelope className="contact-icon" />
-              <a href="mailto:info@volunteeringmatters.org.uk">info@upliftsupport.com</a>
+              <a href="mailto:info@upliftsupport.com">info@upliftsupport.com</a>
             </div>
             <div className="contact-item">
               <FaMapMarkerAlt className="contact-icon" />
@@ -35,8 +37,9 @@ const Footer = () => {
           </div>
           
           <div className="action-buttons">
-            <button className="primary-button">Volunteer with us</button>
-            <button className="secondary-button">Find opportunities near you</button>
+            {/* Updated to use React Router Link */}
+            <Link to="/register" className="primary-button">Volunteer with us</Link>
+            <Link to="/events" className="secondary-button">Find opportunities near you</Link>
           </div>
         </div>
       </div>
@@ -45,9 +48,11 @@ const Footer = () => {
         <div className="footer-info">
           <div className="copyright">
             <p>© 2025 Uplift Volunteering.</p>
-            <p className="legal-text">Uplift Volunteering is a registered charity in Nigeria. Uplift Volunteering is a company limited by guarantee no. 9036387.</p>
+            <p className="legal-text">
+              Uplift Volunteering is a registered charity in Nigeria. 
+              Uplift Volunteering is a company limited by guarantee no. 9036387.
+            </p>
           </div>
-          
           <div className="footer-links">
             <a href="#" className="footer-link">Privacy Policy</a>
             <a href="#" className="footer-link">Cookie Policy</a>

@@ -1,27 +1,31 @@
 /* src/components/Login.css */
 
+/* Page layout */
 .login-page {
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 60px 20px;
-  background-color: #f3f3f3;
+  background-color: #f3f3f3; /* Adjust or remove if you have a global background */
   font-family: Arial, sans-serif;
+  min-height: 100vh; /* Ensures it spans full screen height */
 }
 
+/* Card container */
 .login-card {
   background-color: #fff;
   width: 100%;
-  max-width: 500px;
+  max-width: 400px;
   padding: 40px 30px;
   border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  text-align: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  text-align: center; /* Center content if desired */
 }
 
+/* Heading & Subheading */
 .login-heading {
   margin-bottom: 10px;
-  font-size: 28px;
+  font-size: 24px;
   color: #333;
 }
 
@@ -31,7 +35,7 @@
   margin-bottom: 30px;
 }
 
-/* Login Form */
+/* Form styles */
 .login-form {
   display: flex;
   flex-direction: column;
@@ -53,19 +57,7 @@
   border-radius: 4px;
 }
 
-.forgot-password-link {
-  margin-bottom: 20px;
-  text-align: right;
-  font-size: 14px;
-  color: #007BFF;
-  text-decoration: none;
-}
-
-.forgot-password-link:hover {
-  text-decoration: underline;
-}
-
-/* Primary Button */
+/* Primary button */
 .btn-primary {
   width: 100%;
   padding: 12px;
@@ -83,48 +75,27 @@
   background-color: #0056b3;
 }
 
+/* Message */
 .login-message {
-  margin-top: 20px;
-  font-size: 16px;
-  color: green;
-}
-
-/* Social Login */
-.social-login {
-  margin-top: 20px;
-}
-
-.social-login p {
-  margin-bottom: 10px;
+  margin-top: 10px;
   font-size: 14px;
-  color: #555;
+  color: #d9534f; /* or any color that indicates an error or message */
 }
 
-.google-btn,
-.facebook-btn {
+/* Social login section */
+.social-login-section {
+  margin-top: 20px;
+}
+
+/* Forgot password link */
+.forgot-password-link {
   display: inline-block;
-  margin: 5px 10px;
-  padding: 10px 20px;
+  margin-top: 15px;
+  text-decoration: none;
+  color: #007BFF;
   font-size: 14px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  color: #fff;
-  transition: opacity 0.3s ease;
 }
 
-.google-btn {
-  background-color: #DB4437; /* Google Red */
-}
-
-.google-btn:hover {
-  opacity: 0.8;
-}
-
-.facebook-btn {
-  background-color: #4267B2; /* Facebook Blue */
-}
-
-.facebook-btn:hover {
-  opacity: 0.8;
+.forgot-password-link:hover {
+  text-decoration: underline;
 }

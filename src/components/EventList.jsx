@@ -7,20 +7,23 @@ const EventList = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
-  // Search/filter states
+  // Filter states
   const [searchTerm, setSearchTerm] = useState('');
   const [category, setCategory] = useState('All Categories');
   const [anyDate, setAnyDate] = useState('Any Date');
+  const [location, setLocation] = useState('Any Location');
 
-  // Pagination states
+  // Pagination state
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 9;
 
-  // Fetch events from the API
+  // Fetch all events (using all=1 to override pagination)
   const fetchEvents = async () => {
     try {
-      const res = await fetch(`${process.env.REACT_APP_API_URL}/get_event.php?page=1`);
+      setLoading(true);
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/get_event.php?all=1&_=${Date.now()}`);
       const data = await res.json();
+      console.log("Fetched events:", data);
       if (data.success) {
         setEvents(data.events);
       } else {
@@ -38,24 +41,25 @@ const EventList = () => {
     fetchEvents();
   }, []);
 
+  // Log updated events length (for debugging)
+  useEffect(() => {
+    console.log("Total fetched events:", events.length);
+  }, [events]);
+
   // Derive filtered events
   const filteredEvents = events.filter((event) => {
-    // text search in title or description
     const searchMatch =
       event.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
       event.description.toLowerCase().includes(searchTerm.toLowerCase());
 
-    // category match
     const categoryMatch =
       category === 'All Categories' || event.category === category;
 
-    // date filter
     let dateMatch = true;
     const eventDate = new Date(event.event_date);
     const now = new Date();
-
     if (anyDate === 'This Week') {
-      const weekLater = new Date();
+      const weekLater = new Date(now);
       weekLater.setDate(now.getDate() + 7);
       dateMatch = eventDate >= now && eventDate <= weekLater;
     } else if (anyDate === 'This Month') {
@@ -68,15 +72,18 @@ const EventList = () => {
       dateMatch = eventDate >= nextMonth && eventDate < monthAfterNext;
     }
 
-    return searchMatch && categoryMatch && dateMatch;
+    const locationMatch =
+      location === 'Any Location' || event.location === location;
+
+    return searchMatch && categoryMatch && dateMatch && locationMatch;
   });
 
-  // Pagination calculations
+  // Client-side pagination calculations based on filtered events
   const totalPages = Math.ceil(filteredEvents.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
-  const currentEvents = filteredEvents.slice(startIndex, endIndex);
+  const currentEvents = filteredEvents.slice(startIndex, startIndex + itemsPerPage);
 
+  // Handlers for pagination controls
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
@@ -93,21 +100,23 @@ const EventList = () => {
     }
   };
 
-  // Click handlers
+  // Navigation handlers for event details
   const handleImageClick = (id) => {
     window.location.href = `/event/${id}`;
   };
 
   const handleBookNow = (id) => {
-    // Navigate to details or booking page
     window.location.href = `/event/${id}`;
   };
 
+  // Sample locations for filter dropdown
+  const locations = ['Any Location', 'Narok', 'Mombasa', 'Nairobi', 'Kilimani'];
+
   if (loading) {
-    return <p className="loading">Loading events...</p>;
+    return <p style={{ padding: '20px' }}>Loading events...</p>;
   }
   if (error) {
-    return <p className="error">{error}</p>;
+    return <p style={{ padding: '20px', color: 'red' }}>{error}</p>;
   }
 
   return (
@@ -153,32 +162,49 @@ const EventList = () => {
           <option>This Month</option>
           <option>Next Month</option>
         </select>
+
+        <select
+          value={location}
+          onChange={(e) => {
+            setLocation(e.target.value);
+            setCurrentPage(1);
+          }}
+        >
+          {locations.map((loc) => (
+            <option key={loc} value={loc}>{loc}</option>
+          ))}
+        </select>
       </div>
 
       {/* GRID LAYOUT */}
       <div className="grid-container">
-        {currentEvents.map((event) => (
-          <div key={event.id} className="grid-item">
-           
-            <h2 className="event-title">{event.title}</h2>
-            {event.image && (
-              <img
-                src={event.image}
-                alt={event.title}
-                className="event-image"
-                onClick={() => handleImageClick(event.id)}
-              />
-            )}
-            <p className="event-description">{event.description}</p>
-            <p className="event-date">
-              <strong>Date:</strong> {new Date(event.event_date).toLocaleString()}
-            </p>
-            <p className="event-location">
-              <strong>Location:</strong> {event.location}
-            </p>
-            <button className="btn-book" onClick={() => handleBookNow(event.id)}>Book Now</button>
-          </div>
-        ))}
+        {currentEvents.length === 0 ? (
+          <p>No events found.</p>
+        ) : (
+          currentEvents.map((event) => (
+            <div key={event.id} className="grid-item">
+              <h2 className="event-title">{event.title}</h2>
+              {event.image && (
+                <img
+                  src={event.image}
+                  alt={event.title}
+                  className="event-image"
+                  onClick={() => handleImageClick(event.id)}
+                />
+              )}
+              <p className="event-description">{event.description}</p>
+              <p className="event-date">
+                <strong>Date:</strong> {new Date(event.event_date).toLocaleString()}
+              </p>
+              <p className="event-location">
+                <strong>Location:</strong> {event.location}
+              </p>
+              <button className="btn-book" onClick={() => handleBookNow(event.id)}>
+                Book Now
+              </button>
+            </div>
+          ))
+        )}
       </div>
 
       {/* PAGINATION CONTROLS */}

@@ -15,21 +15,19 @@ const AdminDashboard = () => {
   });
   const [message, setMessage] = useState('');
 
-  // Fetch events from the backend
-  const fetchEvents = () => {
-    fetch(`${process.env.REACT_APP_API_URL}/get_events.php`)
-      .then(response => response.json())
-      .then(data => {
-        if (data.success) {
-          setEvents(data.events);
-        } else {
-          setMessage('Failed to load events.');
-        }
-      })
-      .catch(err => {
-        console.error(err);
-        setMessage('Error fetching events.');
-      });
+  const fetchEvents = async () => {
+    try {
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/get_events.php?all=1&_=${Date.now()}`);
+      const data = await res.json();
+      if (data.success) {
+        setEvents(data.events);
+      } else {
+        setMessage('Failed to load events.');
+      }
+    } catch (err) {
+      console.error(err);
+      setMessage('Error fetching events.');
+    }
   };
 
   useEffect(() => {

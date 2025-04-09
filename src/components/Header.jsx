@@ -9,10 +9,10 @@ const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const toggleMenu = () => {
-    setMenuOpen(!menuOpen);
+    setMenuOpen((prev) => !prev);
   };
 
-  // Allow toggling the menu via Enter key on the hamburger
+  // For keyboard accessibility on the hamburger
   const handleKeyDown = (e) => {
     if (e.key === 'Enter') {
       toggleMenu();
@@ -29,29 +29,31 @@ const Header = () => {
           className="hamburger"
           onClick={toggleMenu}
           onKeyDown={handleKeyDown}
-          aria-label="Toggle navigation"
-          aria-expanded={menuOpen}
           role="button"
           tabIndex="0"
+          aria-label="Toggle navigation"
+          aria-expanded={menuOpen}
         >
           &#9776;
         </div>
 
         {/* Navigation menu */}
-        <nav className={`nav ${menuOpen ? 'open' : ''}`} role="navigation">
-          {/* Show close button only on mobile when menu is open */}
+        <nav className={`nav ${menuOpen ? 'open' : ''}`}>
+          {/* Optional close button on mobile */}
           {menuOpen && (
-            <button 
-              className="nav-close" 
-              onClick={toggleMenu} 
+            <button
+              className="nav-close"
+              onClick={toggleMenu}
               aria-label="Close navigation"
             >
               &times;
             </button>
           )}
+
           <Link to="/" onClick={() => setMenuOpen(false)}>Home</Link>
           <Link to="/about" onClick={() => setMenuOpen(false)}>About Us</Link>
           <Link to="/contact" onClick={() => setMenuOpen(false)}>Contact Us</Link>
+
           {user ? (
             <>
               <Link to="/dashboard" onClick={() => setMenuOpen(false)}>Dashboard</Link>
@@ -63,7 +65,13 @@ const Header = () => {
                 </>
               )}
               <Link to="/calendar" onClick={() => setMenuOpen(false)}>Calendar</Link>
-              <button onClick={() => { logout(); setMenuOpen(false); }} className="logout-btn">
+              <button
+                onClick={() => {
+                  logout();
+                  setMenuOpen(false);
+                }}
+                className="logout-btn"
+              >
                 Logout
               </button>
             </>
